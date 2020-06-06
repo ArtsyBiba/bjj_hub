@@ -58,7 +58,7 @@ app.use('/dojos/:id/comments', commentRoutes);
 app.use('/dojos', dojoRoutes);
 
 // app.listen(3000, function(){
-	console.log('BJJ Hub server has started');
-	});
+//	console.log('BJJ Hub server has started');
+//	});
 
 app.listen(process.env.PORT, process.env.IP);
