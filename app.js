@@ -17,7 +17,16 @@ const commentRoutes = require('./routes/comments'),
 	  indexRoutes   = require('./routes/index')
 
 //seedDB();
-mongoose.connect('mongodb://localhost:27017/bjj_hub', {useNewUrlParser: true, useUnifiedTopology: true});
+//mongoose.connect('mongodb://localhost:27017/bjj_hub', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb+srv://Artsy:AtsQjs4xbtvoTr8a@cluster0-g2reh.mongodb.net/<dbname>?retryWrites=true&w=majority', {
+	useNewUrlParser: true, 
+	useCreateIndex: true,
+	useUnifiedTopology: true
+}).then(() => {
+	console.log('connected to DB');
+}).catch(err => {
+	console.log('error:', err.message);
+});
 mongoose.set('useFindAndModify', false);
 app.use(bodyParser.urlencoded({extended: true}));
 app.set('view engine', 'ejs');
@@ -48,8 +57,8 @@ app.use('/', indexRoutes);
 app.use('/dojos/:id/comments', commentRoutes);
 app.use('/dojos', dojoRoutes);
 
-app.listen(3000, function(){
+// app.listen(3000, function(){
 	console.log('BJJ Hub server has started');
 	});
 
-// app.listen(process.env.PORT, process.env.IP);
+app.listen(process.env.PORT, process.env.IP);
