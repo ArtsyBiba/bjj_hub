@@ -8,6 +8,11 @@ router.get('/', function(req, res){
 	res.render('home');
 });
 
+// Privacy route
+router.get('/privacy', function(req, res){
+	res.render('privacy');
+});
+
 // Show register form
 router.get('/register', function(req, res){
 	res.render('register');

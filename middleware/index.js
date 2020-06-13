@@ -19,7 +19,7 @@ middlewareObj.checkDojoOwnership = function(req, res, next){
 			}
 		});	
 	} else {
-		req.flash('error', 'Please login firts!');
+		req.flash('error', 'Please login first!');
 		res.redirect('back');
 	}
 };
