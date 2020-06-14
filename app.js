@@ -20,7 +20,7 @@ const commentRoutes = require('./routes/comments'),
 
 //seedDB();
 let url = process.env.DATABASEURL || 'mongodb://localhost:27017/bjj_hub';
-mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
 mongoose.set('useFindAndModify', false);
 app.use(bodyParser.urlencoded({extended: true}));
 app.set('view engine', 'ejs');

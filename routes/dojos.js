@@ -40,24 +40,24 @@ router.post('/', middleware.isLoggedIn, function(req, res){
 		id: req.user.id,
 		username: req.user.username
 	};
-geocoder.geocode(req.body.location, function (err, data) {
-    if (err || !data.length) {
-      req.flash('error', 'Invalid address');
-      return res.redirect('back');
-    }
-    var lat = data[0].latitude;
-    var lng = data[0].longitude;
-    var location = data[0].formattedAddress;
-    var newDojo = {name: name, image: image, description: description, author:author, location: location, lat: lat, lng: lng};
-    // Create a new dojo and save to DB
-    Dojo.create(newDojo, function(err, newlyCreated){
-        if(err){
-            console.log(err);
-        } else {
-            //redirect back to dojos page
-            res.redirect('/dojos');
-        }
-    });
+	geocoder.geocode(req.body.location, function (err, data) {
+		if (err || !data.length) {
+		  req.flash('error', 'Invalid address');
+		  return res.redirect('back');
+		}
+		let lat = data[0].latitude;
+		let lng = data[0].longitude;
+		let location = data[0].formattedAddress;
+		let newDojo = {name: name, image: image, fee: fee, description: description, author: author, location: location, lat: lat, lng: lng};
+		// Create a new dojo and save to DB
+		Dojo.create(newDojo, function(err, newlyCreated){
+			if(err){
+				console.log(err);
+			} else {
+				//redirect back to dojos page
+				res.redirect('/dojos');
+			}
+		});
 	});
 });
 
