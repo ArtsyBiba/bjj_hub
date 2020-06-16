@@ -43,7 +43,7 @@ app.use(session({
     secret: 'BJJ will change your life',
     resave: false,
     saveUninitialized: false,
-    // store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
     cookie: { maxAge: 180 * 60 * 1000 } // 180 minutes session expiration
 }));
 app.use(passport.initialize());
