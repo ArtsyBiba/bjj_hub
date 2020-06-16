@@ -11,7 +11,10 @@ const express         = require('express'),
 	  Comment         = require('./models/comment'),
 	  User            = require('./models/user'),
 	  methodOverride  = require('method-override'),
-	  seedDB          = require('./seeds')
+	  seedDB          = require('./seeds'),
+	  session         = require('express-session'),
+	  MongoStore      = require('connect-mongo')(session)
+
 
 // Requiring routes
 const commentRoutes = require('./routes/comments'),
@@ -29,11 +32,19 @@ app.use(methodOverride('_method'));
 app.use(flash());
 app.locals.moment = require('moment');
 
+
+// app.use(require("express-session")({
+// 	secret: 'BJJ will change your life',
+// 	resave: false,
+// 	saveUninitialized: false
+// }));
 // PASSPORT CONFIG
-app.use(require("express-session")({
-	secret: 'BJJ will change your life',
-	resave: false,
-	saveUninitialized: false
+app.use(session({
+    secret: 'BJJ will change your life',
+    resave: false,
+    saveUninitialized: false,
+    // store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    cookie: { maxAge: 180 * 60 * 1000 } // 180 minutes session expiration
 }));
 app.use(passport.initialize());
 app.use(passport.session());
